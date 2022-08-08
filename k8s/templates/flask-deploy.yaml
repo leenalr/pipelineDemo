@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Values.metadata.labels }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.spec.labels }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.template.labels }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: {{ .Values.service.port | quote }}
+        prometheus.io/path: /metrics
+    spec:
+      containers:
+      - name: {{ .Values.template.containers.name }}
+        image: {{ .Values.template.containers.image }}
+        env:
+        - name: {{ .Values.env.name | quote}}
+          value: {{ .Values.env.value | quote }}
+        ports:
+        - containerPort: {{ .Values.ports.containerPort }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecrets.name}}
+---
+{{- if .Values.service.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+   name: {{ .Values.service.name }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: {{ .Values.service.app }}
+  ports:
+    - name: {{ .Values.service.name }}
+      protocol: {{ .Values.service.protocol }}
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort}}
+#{{- if .Values.service.secondPortEnabled }}
+#    - name: {{ .Values.service.secondPort.name }}
+#      protocol: {{ .Values.service.secondPort.protocol }}
+#      port: {{ .Values.service.secondPort.port }}
+#      targetPort: {{ .Values.service.secondPort.targetPort}}
+#{{- end }}
+{{- end }}

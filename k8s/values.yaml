@@ -1,0 +1,30 @@
+metadata:
+  labels: flask
+spec:
+  labels: flask
+template:
+  labels: flask
+  containers:
+    name: flaskapp
+    image: leenalr/flaskapp:v1
+env:
+  name: "PSQL_URL"
+  value: "postgresql://postgres:test123@postgres-postgresql/postgres"
+ports:
+  containerPort: 5000
+imagePullSecrets:
+  name: leena-secret
+service:
+  enabled: true
+  name: flaskapp-svc
+  type: ClusterIP
+  app: flask
+  protocol: TCP
+  port: 8080
+  targetPort: 5000
+#  secondPortEnabled: true
+#  secondPort:
+#    name: metrics
+#    protocol: TCP
+#    port: 8081
+#    targetPort: 8081
