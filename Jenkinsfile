@@ -8,15 +8,16 @@ pipeline {
     stages { 
         stage('Building our image') { 
             steps { 
+                when { tag "release-*" }
                   script { 
                     dockerImage = docker.build registry + ":$BUILD_NUMBER" 
                 }
             } 
         }
-        stage('push our image') { 
-            steps { 
-                script { 
-                    docker.withRegistry( '', registryCredential ) { 
+    stage('push our image') { 
+        steps { 
+            script { 
+                docker.withRegistry( '', registryCredential ) { 
                         dockerImage.push() 
                     }
                 } 
