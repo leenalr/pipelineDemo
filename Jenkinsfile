@@ -7,8 +7,7 @@ pipeline {
     agent any 
     stages { 
         stage('Building our image') { 
-            steps { 
-                when { tag "release-*" }
+            steps {
                   script { 
                     dockerImage = docker.build registry + ":$BUILD_NUMBER" 
                 }
