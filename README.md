@@ -57,3 +57,12 @@ Deploying in kubernetes:
        cd k8s
        helm install flaskapp -n flaskapp .
        
+3. clone a chart for postgresql
+
+        git clone https://github.com/helm/charts.git
+        
+4.deploy postgresql
+
+        cd charts/stable/postgresql
+        helm install postgres -n flaskapp .
+        
