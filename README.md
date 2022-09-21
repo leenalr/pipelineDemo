@@ -1,3 +1,9 @@
+sample output:
+
+https://flaskapp.trojanae.com/
+
+
+
 1. Run a docker container for psql
 
         docker run -d --rm 
