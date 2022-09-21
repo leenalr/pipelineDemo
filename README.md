@@ -60,23 +60,34 @@ To list the image,
         
 • check : http://127.0.0.1:5000
 
+<h1> How to push docker image to docker hub</h1>
+
+        docker login -u username -p password
+        docker tag imagename:version reponame:version
+        docker push reponame:version
+
 <h1>Deploying in kubernetes</h1>
 
 <h5>1.Create a namespace</h5>
 
         kubectl create ns flaskapp
+<h5>2.Create secret for accessing your image repo</h5>
+        Iam using docker hub
         
-<h5>2.Deploy using helm</h5>
+        kubectl create secret docker-registry regcred --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>
+        
+<h5>3.Deploy using helm</h5>
  
        cd k8s
        helm install flaskapp -n flaskapp .
        
-<h5>3.Clone a chart for postgresql</h5>
+<h5>4.Clone a chart for postgresql</h5>
 
         git clone https://github.com/helm/charts.git
         
-<h5>4.Deploy postgresql</h5>
+<h5>5.Deploy postgresql</h5>
 
         cd charts/stable/postgresql
         helm install postgres -n flaskapp .
         
+
