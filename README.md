@@ -76,7 +76,7 @@ To list the image,
         
         kubectl create secret docker-registry regcred --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>
         
-<h5>3.Deploy using helm</h5>
+<h5>3.Deploy your application using helm</h5>
  
        cd k8s
        helm install flaskapp -n flaskapp .
