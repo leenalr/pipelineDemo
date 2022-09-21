@@ -43,3 +43,17 @@ To run the app just use
         docker-compose up -d
         
 • check : http://127.0.0.1:5000
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Deploying in kubernetes:
+
+1. create a namespace
+
+        kubectl create ns flaskapp
+        
+2. deploy using helm
+ 
+       cd k8s
+       helm install flaskapp -n flaskapp .
+       
