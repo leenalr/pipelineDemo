@@ -1,16 +1,21 @@
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
-metadata: 
-        name: flaskapp-ingress
+metadata:
+	name: flaskapp-ingress
 #        namespace: {{ .Release.Namespace}}
         annotations:
           kubernetes.io/ingress.class: nginx
-          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          nginx.ingress.kubernetes.io/ssl-redirect: "false"
+#'{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTP", "Port": "80", "StatusCode": "HTTP_301"}}'
           nginx.ingress.kubernetes.io/rewrite-target: /
-spec: 
-        rules: 
-        - host: flaskapp.trojanae.com 
+         # nginx.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+spec:
+     	tls:
+	- hosts:
+          - flaskapp.trojanae.com
+          secretName: flaskapp-tls
+        rules:
+	- host: flaskapp.trojanae.com
           http:
             paths:
             - path: /
@@ -18,7 +23,6 @@ spec:
               backend:
                 service:
                   name: flaskapp-svc
-                  port: 
+                  port:
                     number: 8080
-
 
