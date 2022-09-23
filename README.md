@@ -43,7 +43,7 @@ To list the image,
 <h5>4.Run the docker image</h5>
         
         docker run --rm 
-        \--name flaskapp 
+        --name flaskapp\
         \--network appTopsql_network 
         \-p 5000:5000 
         \-ePSQL_URL="postgresql://postgres:mysecretpassword@some-postgres/postgres"
