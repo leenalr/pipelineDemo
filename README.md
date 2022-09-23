@@ -19,10 +19,10 @@ In order to use this code, firstly clone the repo using git or download the zip 
 <h5>1. Run a docker container for psql</h5>
 
         docker run -d --rm 
-            \-p 5432:5432 
-            \--name some-postgres 
-            \-e POSTGRES_PASSWORD=mysecretpassword 
-            \postgres
+            -p 5432:5432 \
+            --name some-postgres \
+            -e POSTGRES_PASSWORD=m\ysecretpassword \
+            postgres\
             
 <h5>2.Creating a network</h5>
 
