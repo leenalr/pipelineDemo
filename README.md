@@ -44,10 +44,10 @@ To list the image,
         
         docker run --rm 
         --name flaskapp\
-        \--network appTopsql_network 
-        \-p 5000:5000 
-        \-ePSQL_URL="postgresql://postgres:mysecretpassword@some-postgres/postgres"
-        \flaskapp:v1
+        --network appTopsql_network \
+        -p 5000:5000 \
+        -ePSQL_URL="postgresql://postgres:mysecretpassword@some-postgres/postgres"\
+        flaskapp:v1\
         
         
  • check : http://127.0.0.1:5000
