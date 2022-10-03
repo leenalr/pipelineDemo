@@ -16,7 +16,7 @@ pipeline {
         steps { 
             script { 
                 docker.withRegistry( '', registryCredential ) { 
-                        sh 'docker tag flaskapp:$BUILD_NUMBER leenalr/flaskapp:$BUILD_NUMBER'
+                        //sh 'docker tag flaskapp:$BUILD_NUMBER leenalr/flaskapp:$BUILD_NUMBER'
                         sh 'docker push leenalr/flaskapp:$BUILD_NUMBER'
                     }
                 } 
