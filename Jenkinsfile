@@ -5,6 +5,38 @@ pipeline {
         dockerImage = ''
     }
     agent any 
+    job('Example Job Name') {
+    description 'Example description'
+    properties {
+        office365ConnectorWebhooks {
+            webhooks {
+                webhook {
+                    name('Example Webhook Name')
+                    url('https://outlook.office.com/webhook/123456...')
+                    startNotification(false)
+                    notifySuccess(true)
+                    notifyAborted(false)
+                    notifyNotBuilt(false)
+                    notifyUnstable(true)
+                    notifyFailure(true)
+                    notifyBackToNormal(true)
+                    notifyRepeatedFailure(false)
+                    timeout(30000)
+                }
+            }
+        }
+    }
+
+    // Webhook Macro Configuration
+    configure {
+        // Example: Conditioning webhook trigger on build parameter 'version' being equal to 'latest'
+        // Templates are defined as token macros https://github.com/jenkinsci/token-macro-plugin
+        it / 'properties' / 'jenkins.plugins.office365connector.WebhookJobProperty' / 'webhooks' / 'jenkins.plugins.office365connector.Webhook' / 'macros' << 'jenkins.plugins.office365connector.model.Macro' {
+          template('${ENV, var="version"}')
+          value('latest')
+        }
+    }
+}
     stages { 
         stage('Building our image') { 
             steps {
