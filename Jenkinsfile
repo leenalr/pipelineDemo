@@ -8,16 +8,16 @@ pipeline {
     stages { 
         stage('Building our image') { 
             steps {
-                  script { 
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
-                }
+                
+               sh 'docker build --network host -t flaskapp:$BUILD_NUMBER .' 
             } 
         }
     stage('pushes our image') { 
         steps { 
             script { 
                 docker.withRegistry( '', registryCredential ) { 
-                        dockerImage.push() 
+                        sh 'docker tag flaskapp:$BUILD_NUMBER leenalr/flaskapp:$BUILD_NUMBER'
+                        sh 'docker push leenalr/flaskapp:$BUILD_NUMBER'
                     }
                 } 
             }
