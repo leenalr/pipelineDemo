@@ -5,7 +5,10 @@ pipeline {
         dockerImage = ''
     }
     agent any 
-    job('Example Job Name') {
+   
+    stages { 
+        
+         job('Example Job Name') {
     description 'Example description'
     properties {
         office365ConnectorWebhooks {
@@ -37,7 +40,6 @@ pipeline {
         }
     }
 }
-    stages { 
         stage('Building our image') { 
             steps {
                 
