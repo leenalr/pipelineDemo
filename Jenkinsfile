@@ -27,11 +27,12 @@ pipeline {
     }
     post {
         success{
+            sh 'printenv'
 
             echo '========pipeline executed successfully ========'
             office365ConnectorSend color: '#00ff00',
 
-                                   message: "ProjectX service build ${env.BUILD_ID} succeeded on ${env.BRANCH_NAME}.(space, space)Job_details ${env.JOB_NAME} ${env.BUILD_NUMBER}",
+                                   message: "Job_details ${env.JOB_NAME} ${env.BUILD_NUMBER}build ${env.BUILD_ID} succeeded on ${env.BRANCH_NAME}",
 
                                    status: 'Success',
                                       
