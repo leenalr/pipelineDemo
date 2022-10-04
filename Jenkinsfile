@@ -32,7 +32,7 @@ pipeline {
             echo '========pipeline executed successfully ========'
             office365ConnectorSend color: '#00ff00',
 
-                                   message: " Job name : ${env.JOB_NAME} Build number: ${env.BUILD_NUMBER} Build id: ${env.BUILD_ID} Git branch: ${env.BRANCH_NAME}  Git commit: ${env.GIT_COMMIT} New image is pushed to ${env.registry} and build tag is ${env.BUILD_TAG}",
+                                   message: " Job name : ${env.JOB_NAME} Build number: ${env.BUILD_NUMBER} Build id: ${env.BUILD_ID} Git branch: ${env.BRANCH_NAME}  Git commit: ${env.GIT_COMMIT} New image is pushed to ${env.registry} and build tag is ${env.BUILD_TAG} Log can be referenced : ${env.COPY_REFERENCE_FILE_LOG}",
 
                                    status: 'Success',
                                       
@@ -46,8 +46,9 @@ pipeline {
 
             office365ConnectorSend color: '#ff0000',
 
-                                   message: "ProjectX service build ${env.BUILD_ID} failed on ${env.BRANCH_NAME}.(space, space)",
 
+                                   message: " Job name : ${env.JOB_NAME} Build number: ${env.BUILD_NUMBER} Build id: ${env.BUILD_ID} Git branch: ${env.BRANCH_NAME}  Git commit: ${env.GIT_COMMIT} New image is pushed to ${env.registry} and build tag is ${env.BUILD_TAG} Log can be referenced : ${env.COPY_REFERENCE_FILE_LOG}",
+                                   
                                    status: 'Failure',
 
                                    webhookUrl: "https://datasirpiprivatelimited.webhook.office.com/webhookb2/756c1311-753c-4c87-8b8f-16df76ee44dc@69e0551c-0320-425f-b935-c3e87cb83212/JenkinsCI/9ac5dbbc962e4484a2c99c0552a673e9/47de5d67-1661-48fd-ab0f-6c7ca49d8cfc"
