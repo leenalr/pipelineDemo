@@ -35,9 +35,9 @@ pipeline {
 
                                    status: 'Success',
                                     
-                                   Build_details:"${env.JOB_NAME} ${env.BUILD_NUMBER}"
+                                   message:" Job_details ${env.JOB_NAME} ${env.BUILD_NUMBER}"
 
-                                   webhookUrl: "${teamsUrl}"
+                                   webhookUrl: "https://datasirpiprivatelimited.webhook.office.com/webhookb2/756c1311-753c-4c87-8b8f-16df76ee44dc@69e0551c-0320-425f-b935-c3e87cb83212/JenkinsCI/9ac5dbbc962e4484a2c99c0552a673e9/47de5d67-1661-48fd-ab0f-6c7ca49d8cfc"
 
         }
 
@@ -51,7 +51,7 @@ pipeline {
 
                                    status: 'Failure',
 
-                                   webhookUrl: "${teamsUrl}"
+                                   webhookUrl: "https://datasirpiprivatelimited.webhook.office.com/webhookb2/756c1311-753c-4c87-8b8f-16df76ee44dc@69e0551c-0320-425f-b935-c3e87cb83212/JenkinsCI/9ac5dbbc962e4484a2c99c0552a673e9/47de5d67-1661-48fd-ab0f-6c7ca49d8cfc"
 
         }
     }
