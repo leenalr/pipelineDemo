@@ -32,7 +32,7 @@ pipeline {
             echo '========pipeline executed successfully ========'
             office365ConnectorSend color: '#00ff00',
 
-                                   message: "Job_details ${env.JOB_NAME} ${env.BUILD_NUMBER}build ${env.BUILD_ID} succeeded on ${env.BRANCH_NAME}",
+                                   message: " ${env.JOB_NAME} with ${env.BUILD_NUMBER} and build_id ${env.BUILD_ID} succeeded on branch ${env.BRANCH_NAME} with Git commit hash ${env.GIT_COMMIT}.(space, space) New image is pushed to ${env.registry} and build tag is ${env.BUILD_TAG}",
 
                                    status: 'Success',
                                       
