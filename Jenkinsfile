@@ -29,9 +29,9 @@ pipeline {
         success{
             office365ConnectorSend color: '#00ff00',
                                    webhookUrl: "https://datasirpiprivatelimited.webhook.office.com/webhookb2/756c1311-753c-4c87-8b8f-16df76ee44dc@69e0551c-0320-425f-b935-c3e87cb83212/JenkinsCI/9ac5dbbc962e4484a2c99c0552a673e9/47de5d67-1661-48fd-ab0f-6c7ca49d8cfc" 
-                                   message: "ProjectX service build ${env.BUILD_ID} succeeded on ${env.BRANCH_NAME}.(space, space)New image published to ${registryTag}/${registryName}:${tag}.\n
-                                   status: 'Success'\n
-                                   Build_Number: ${env.BUILD_NUMBER} \n
+                                   message: "ProjectX service build ${env.BUILD_ID} succeeded on ${env.BRANCH_NAME}.(space, space)New image published to ${registryTag}/${registryName}:${tag}.'\n'
+                                   status: 'Success''\n'
+                                   Build_Number: ${env.BUILD_NUMBER} '\n'
                                    Build_status: ${currentBuild.currentResult}"
 
 
@@ -39,8 +39,8 @@ pipeline {
         }}
         failure {
            office365ConnectorSend webhookUrl: "https://datasirpiprivatelimited.webhook.office.com/webhookb2/756c1311-753c-4c87-8b8f-16df76ee44dc@69e0551c-0320-425f-b935-c3e87cb83212/JenkinsCI/9ac5dbbc962e4484a2c99c0552a673e9/47de5d67-1661-48fd-ab0f-6c7ca49d8cfc" 
-                               message: "${env.JOB_NAME} \n
-                               Build_Number: ${env.BUILD_NUMBER} \n
+                               message: "${env.JOB_NAME} '\n'
+                               Build_Number: ${env.BUILD_NUMBER} '\n'
                                Build_status: ${currentBuild.currentResult}"
         
         }
