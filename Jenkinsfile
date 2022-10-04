@@ -31,9 +31,11 @@ pipeline {
             echo '========pipeline executed successfully ========'
             office365ConnectorSend color: '#00ff00',
 
-                                   message: "ProjectX service build ${env.BUILD_ID} succeeded on ${env.BRANCH_NAME}.(space, space)New image published to ${registryTag}/${registryName}:${tag}.",
+                                   message: "ProjectX service build ${env.BUILD_ID} succeeded on ${env.BRANCH_NAME}.(space, space)",
 
                                    status: 'Success',
+                                    
+                                   Build_details:"${env.JOB_NAME} ${env.BUILD_NUMBER}"
 
                                    webhookUrl: "${teamsUrl}"
 
