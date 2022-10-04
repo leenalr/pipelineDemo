@@ -27,6 +27,7 @@ pipeline {
     }
     post {
         success{
+            sh 'printenv'
 
             echo '========pipeline executed successfully ========'
             office365ConnectorSend color: '#00ff00',
