@@ -16,9 +16,7 @@ pipeline {
         stage('Scan') {
              steps {
                 script {
-                    //sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/.cache:/root/.cache/ aquasec/trivy:0.18.3 image -f json -o /root/.cache/results.json flaskapp:$BUILD_NUMBER'
-                    sh 'sudo curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/master/contrib/install.sh | sh -s -- -b /usr/local/bin'
-                    sh 'trivy image flaskapp:$BUILD_NUMBER'
+                    sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/.cache:/root/.cache/ aquasec/trivy:0.32.1 image -f json -o /root/.cache/results.json flaskapp:$BUILD_NUMBER'
                 }
               }
         }
