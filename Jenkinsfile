@@ -16,9 +16,9 @@ pipeline {
         stage('Scan') {
              steps {
                 script {
-                    docker.withRegistry( '', registryCredential ) {
+                    sh 'docker login ghcr.io -u leenalr -p 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'
                     sh 'docker run --rm  aquasec/trivy image flaskapp:$BUILD_NUMBER'
-                    }
+                    
                 }
              }
         }
