@@ -13,11 +13,18 @@ pipeline {
                sh 'docker build --network host -t flaskapp:$BUILD_NUMBER .' 
             } 
         }
+        stage('Scan') {
+             steps {
+                script {
+                    sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/.cache:/root/.cache/ aquasec/trivy:0.18.3 image -f json -o /root/.cache/results.json flaskapp:$BUILD_NUMBER'
+                }
+              }
+        }
     stage('pushes our image') { 
         steps { 
             script { 
                 docker.withRegistry( '', registryCredential ) { 
-                        //sh 'docker tag flaskapp:$BUILD_NUMBER leenalr/flaskapp:$BUILD_NUMBER'
+                        sh 'docker tag flaskapp:$BUILD_NUMBER leenalr/flaskapp:$BUILD_NUMBER'
                         sh 'docker push leenalr/flaskapp:$BUILD_NUMBER'
                     }
                 } 
