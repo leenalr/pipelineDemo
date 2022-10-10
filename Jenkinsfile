@@ -16,9 +16,11 @@ pipeline {
         stage('Scan') {
              steps {
                 script {
+                    docker.withRegistry( '', registryCredential ) {
                     sh 'docker run --rm  aquasec/trivy image flaskapp:$BUILD_NUMBER'
+                    }
                 }
-              }
+             }
         }
     stage('pushes our image') { 
         steps { 
