@@ -61,6 +61,18 @@ pipeline {
                                    webhookUrl: "https://datasirpiprivatelimited.webhook.office.com/webhookb2/756c1311-753c-4c87-8b8f-16df76ee44dc@69e0551c-0320-425f-b935-c3e87cb83212/JenkinsCI/9ac5dbbc962e4484a2c99c0552a673e9/47de5d67-1661-48fd-ab0f-6c7ca49d8cfc"
 
         }
+        always {
+            archiveArtifacts artifacts: "trivy_report.html", fingerprint: true
+                
+            publishHTML (target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: '/root/.cache',
+                reportFiles: 'result.json',
+                reportName: 'Trivy Scan',
+                ])
+            }
     }
 }
 
