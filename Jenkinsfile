@@ -62,6 +62,9 @@ pipeline {
 
         }
         always {
+            sh 'ls'
+            sh 'cd /root/.cache'
+            sh 'ls'
             archiveArtifacts artifacts: "/root/.cache/result.json", fingerprint: true
                 
             publishHTML (target: [
