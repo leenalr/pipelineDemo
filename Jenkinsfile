@@ -16,7 +16,7 @@ pipeline {
         stage('Scan') {
              steps {
                 script {
-                    sh 'docker run --rm --network host -v /var/run/docker.sock:/var/run/docker.sock  aquasec/trivy:0.18.3 image -f index.html flaskapp:$BUILD_NUMBER'     
+                    sh 'docker run --rm --network host -v /var/run/docker.sock:/var/run/docker.sock  aquasec/trivy:0.18.3 image -f index.json flaskapp:$BUILD_NUMBER'     
                 }
              }
         }
