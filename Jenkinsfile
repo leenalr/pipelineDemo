@@ -62,7 +62,7 @@ pipeline {
 
         }
         always {
-            archiveArtifacts artifacts: "trivy_report.html", fingerprint: true
+            archiveArtifacts artifacts: "result.json", fingerprint: true
                 
             publishHTML (target: [
                 allowMissing: false,
