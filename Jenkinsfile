@@ -16,7 +16,7 @@ pipeline {
         stage('Scan') {
              steps {
                 script {
-                    sh 'docker run --rm --network host -v /var/run/docker.sock:/var/run/docker.sock  aquasec/trivy:0.18.3 image flaskapp:$BUILD_NUMBER'     
+                    sh 'docker run --rm --network host -v /var/run/docker.sock:/var/run/docker.sock  aquasec/trivy:0.18.3 image -f index.html flaskapp:$BUILD_NUMBER'     
                 }
              }
         }
@@ -32,7 +32,7 @@ pipeline {
         
         } 
     }
-   // post {
+    post {
       //  success{
          //   sh 'printenv'
 
@@ -61,7 +61,18 @@ pipeline {
                           //         webhookUrl: "https://datasirpiprivatelimited.webhook.office.com/webhookb2/756c1311-753c-4c87-8b8f-16df76ee44dc@69e0551c-0320-425f-b935-c3e87cb83212/JenkinsCI/9ac5dbbc962e4484a2c99c0552a673e9/47de5d67-1661-48fd-ab0f-6c7ca49d8cfc"
 
        // } 
+        success {
+          // publish html
+          publishHTML target: [
+              allowMissing: false,
+              alwaysLinkToLastBuild: false,
+              keepAll: true,
+              reportDir: 'coverage',
+              reportFiles: 'index.html',
+              reportName: 'Trivy Report'
+            ]
+        }
         
     }
-//}
+}
 
