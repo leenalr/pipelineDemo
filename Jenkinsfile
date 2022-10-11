@@ -17,7 +17,7 @@ pipeline {
              steps {
                 script {
                     sh 'docker login ghcr.io -u leenalr -p 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'
-                    sh 'docker run --rm  aquasec/trivy image flaskapp:$BUILD_NUMBER'
+                    sh 'docker run --rm --network host aquasec/trivy image flaskapp:$BUILD_NUMBER'
                     
                 }
              }
