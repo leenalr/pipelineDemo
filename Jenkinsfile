@@ -16,7 +16,7 @@ pipeline {
         stage('Scan') {
              steps {
                 script {
-                    sh 'docker run --rm --network host -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/.cache:/root/.cache/ aquasec/trivy:0.18.3 image -f json -o /root/.cache/results.json flaskapp:$BUILD_NUMBER'     
+                    sh 'docker run --rm --network host -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/.cache:/root/.cache/ aquasec/trivy:0.18.3 image -f json -o /root/.cache/results.json --no-progress --exit-code 1 --severity HIGH,CRITICAL flaskapp:$BUILD_NUMBER'     
                 }
              }
         }
@@ -61,21 +61,7 @@ pipeline {
                                    webhookUrl: "https://datasirpiprivatelimited.webhook.office.com/webhookb2/756c1311-753c-4c87-8b8f-16df76ee44dc@69e0551c-0320-425f-b935-c3e87cb83212/JenkinsCI/9ac5dbbc962e4484a2c99c0552a673e9/47de5d67-1661-48fd-ab0f-6c7ca49d8cfc"
 
         }
-        always {
-            sh 'ls'
-            sh 'cd /root/.cache'
-            sh 'ls'
-            archiveArtifacts artifacts: "/root/.cache/result.json", fingerprint: true
-                
-            publishHTML (target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: false,
-                keepAll: true,
-                reportDir: '/root/.cache',
-                reportFiles: 'result.json',
-                reportName: 'Trivy Scan',
-                ])
-            }
+        
     }
 }
 
