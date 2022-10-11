@@ -62,7 +62,7 @@ pipeline {
 
         }
         always {
-            archiveArtifacts artifacts: "result.json", fingerprint: true
+            archiveArtifacts artifacts: "/root/.cache/result.json", fingerprint: true
                 
             publishHTML (target: [
                 allowMissing: false,
