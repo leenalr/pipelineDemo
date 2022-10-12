@@ -67,7 +67,7 @@ pipeline {
               allowMissing: false,
               alwaysLinkToLastBuild: false,
               keepAll: true,
-              reportDir: 'coverage',
+              reportDir: '.',
               reportFiles: 'report.html',
               reportName: 'Trivy Report'
             ]
