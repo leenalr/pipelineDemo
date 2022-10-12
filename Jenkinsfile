@@ -16,7 +16,7 @@ pipeline {
         stage('Scan') {
              steps {
                 script {
-                    sh 'docker run --rm --network host -v /var/run/docker.sock:/var/run/docker.sock  aquasec/trivy:0.18.3 image --format template --template "@contrib/html.tpl" -o report.html flaskapp:$BUILD_NUMBER'     
+                    sh 'docker run --rm --network host -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/.cache:/root/.cache/ aquasec/trivy:0.18.3 image --format template --template "@contrib/html.tpl" -o report.html flaskapp:$BUILD_NUMBER'     
                 }
              }
         }
@@ -67,7 +67,7 @@ pipeline {
               allowMissing: false,
               alwaysLinkToLastBuild: false,
               keepAll: true,
-              reportDir: '.',
+              reportDir: '/var/jenkins_home/.cache',
               reportFiles: 'report.html',
               reportName: 'Trivy Report'
             ]
