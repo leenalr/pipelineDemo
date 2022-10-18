@@ -16,7 +16,7 @@ pipeline {
         stage('Scan') {
              steps {
                 script {
-                    sh 'docker run --rm --network host -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/.cache:/root/.cache/ aquasec/trivy:0.18.3 image --exit-code 1 --severity CRITICAL,HIGH,MEDIUM -f json -o /root/.cache/results_$BUILD_NUMBER.json flaskapp:$BUILD_NUMBER'     
+                    sh 'docker run --rm --network host -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/.cache:/root/.cache/ aquasec/trivy:0.18.3 image --exit-code 1 --severity CRITICAL,HIGH,MEDIUM -f json -o /root/.cache/results.json flaskapp:$BUILD_NUMBER'     
                 }
              }
         }
@@ -68,7 +68,7 @@ pipeline {
               alwaysLinkToLastBuild: false,
               keepAll: true,
               reportDir: '/var/jenkins_home/.cache',
-              reportFiles: 'results_$BUILD_NUMBER.json',
+              reportFiles: 'results.json',
               reportName: 'Trivy Report'
             ]
         }
