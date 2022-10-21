@@ -13,13 +13,21 @@ pipeline {
                sh 'docker build --network host -t flaskapp:$BUILD_NUMBER .' 
             } 
         }
-        stage('Scan') {
+//        stage('Scan') {
+//             steps {
+//                script {
+//                    sh 'docker run --rm --network host -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/.cache:/root/.cache/ aquasec/trivy:0.18.3 image flaskapp:$BUILD_NUMBER'     
+//                }
+//    }
+//        }
+         stage('Scan') {
              steps {
                 script {
-                    sh 'docker run --rm --network host -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home/.cache:/root/.cache/ aquasec/trivy:0.18.3 image flaskapp:$BUILD_NUMBER'     
-                }
-             }
+                      sh  'docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-full-scan.py \
+    -t https://www.example.com -g gen.conf -r testreport.html'
         }
+    }
+       }
     stage('pushes our image') { 
         steps { 
             script { 
