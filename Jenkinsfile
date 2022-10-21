@@ -23,7 +23,7 @@ pipeline {
          stage('Scan') {
              steps {
                 script {
-                      sh  'docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-full-scan.py \
+                      sh  'docker run --network host -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-full-scan.py \
     -t https://www.example.com -g gen.conf -r testreport.html'
         }
     }
