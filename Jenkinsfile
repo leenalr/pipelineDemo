@@ -20,14 +20,14 @@ pipeline {
 //                }
 //    }
 //        }
-         stage('zap host Scan') {
-             steps {
-                script {
-                      sh  'docker run --network host -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-full-scan.py \
-    -t https://flaskapp.trojanae.com -g gen.conf -r testreport.html'
-        }
-    }
-       }
+//         stage('zap host Scan') {
+//             steps {
+//                script {
+//                      sh  'docker run --network host -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-full-scan.py \
+//    -t https://flaskapp.trojanae.com -g gen.conf -r testreport.html'
+//        }
+//    }
+//       }
     stage('pushes our image') { 
         steps { 
             script { 
@@ -69,17 +69,17 @@ pipeline {
                           //         webhookUrl: "https://datasirpiprivatelimited.webhook.office.com/webhookb2/756c1311-753c-4c87-8b8f-16df76ee44dc@69e0551c-0320-425f-b935-c3e87cb83212/JenkinsCI/9ac5dbbc962e4484a2c99c0552a673e9/47de5d67-1661-48fd-ab0f-6c7ca49d8cfc"
 
        // } 
-        success {
+        //success {
           // publish html
-          publishHTML target: [
-              allowMissing: false,
-              alwaysLinkToLastBuild: false,
-              keepAll: true,
-              reportDir: '/var/jenkins_home/.cache',
-              reportFiles: 'results.json',
-              reportName: 'Trivy Report'
-            ]
-        }
+          //publishHTML target: [
+          //    allowMissing: false,
+          //    alwaysLinkToLastBuild: false,
+          //    keepAll: true,
+          //    reportDir: '/var/jenkins_home/.cache',
+          //    reportFiles: 'results.json',
+          //    reportName: 'Trivy Report'
+          //  ]
+      //  }
         
     }
 }
